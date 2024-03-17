@@ -1,10 +1,5 @@
-# S3
-variable "domain_name" {
-  description = "Root domain of the website"
-  type        = string
-}
 
-# CloudFront
+
 variable "origin_access_type" {
   description = "Origin access type"
   type        = string
@@ -29,3 +24,4 @@ variable "price_class" {
   description = "The price class of the CloudFront distribution"
   type        = string
 }
+
