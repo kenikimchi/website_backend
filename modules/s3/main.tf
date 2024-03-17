@@ -11,11 +11,11 @@ resource "aws_s3_bucket" "www" {
 }
 
 resource "aws_s3_bucket" "pipeline_bucket" {
-  bucket = "pipeline_bucket"
+  bucket = "kendrickkim-pipelinebucket"
 }
 
 resource "aws_s3_bucket" "lambda_dependencies" {
-  bucket = "lambda_dependencies"
+  bucket = "kendrickkim-lambdadependencies"
 }
 
 resource "aws_s3_bucket_website_configuration" "root" {
