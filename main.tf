@@ -30,4 +30,15 @@ module "cloudfront" {
   origin_access_type        = var.origin_access_type
   geo_restriction_locations = var.geo_restriction_locations
   root_object               = var.root_object
+  www_domain_name           = module.s3.www_domain_name
+  root_certificate_arn      = module.route53.root_certificate_arn
+}
+
+module "route53" {
+  source = "./modules/route53"
+
+  domain_name                     = var.domain_name
+  private_zone                    = false
+  s3_distribution_domain_name     = module.cloudfront.s3_distribution_domain_name
+  s3_distribution_hosted_zoned_id = module.cloudfront.s3_distribution_hosted_zoned_id
 }

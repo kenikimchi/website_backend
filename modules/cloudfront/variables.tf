@@ -25,3 +25,11 @@ variable "price_class" {
   type        = string
 }
 
+variable "www_domain_name" {
+  description = "Regional domain name of the www subdomain bucket"
+  type        = string
+}
+
+variable "root_certificate_arn" {
+  description = "Root certificate arn"
+}

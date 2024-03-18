@@ -13,7 +13,7 @@ resource "aws_cloudfront_origin_access_control" "primary" {
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name              = aws_s3_bucket.www.bucket_regional_domain_name
+    domain_name              = var.www_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.primary.id
     origin_id                = local.s3_origin_id
   }
@@ -53,7 +53,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn            = aws_acm_certificate.root.arn
+    acm_certificate_arn            = var.root_certificate_arn
     cloudfront_default_certificate = false
     ssl_support_method             = "sni-only"
     minimum_protocol_version       = "TLSv1.2_2021"

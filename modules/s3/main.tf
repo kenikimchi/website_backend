@@ -23,7 +23,24 @@ resource "aws_s3_bucket_website_configuration" "root" {
 
   redirect_all_requests_to {
     host_name = aws_s3_bucket.www.id
+    protocol  = "https"
   }
+}
+
+resource "aws_s3_bucket_website_configuration" "www" {
+  bucket = aws_s3_bucket.www.id
+
+  index_document {
+    suffix = "home"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "www" {
+  bucket = aws_s3_bucket.www.id
 }
 
 # Bucket Policies

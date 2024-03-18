@@ -29,3 +29,10 @@ variable "price_class" {
   description = "The price class of the CloudFront distribution"
   type        = string
 }
+
+# Route53
+variable "private_zone" {
+  description = "Certificate private zone or not"
+  type        = bool
+  default     = false
+}
