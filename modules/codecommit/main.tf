@@ -15,7 +15,7 @@ resource "aws_codecommit_approval_rule_template" "source_repository_approval" {
     "DestinationReferences": ["refs/heads/${var.source_repository_branch}"],
     "Statements": [{
         "Type": "Approvers",
-        "NumberOfApprovalsNeeded": 2,
+        "NumberOfApprovalsNeeded": 1,
         "ApprovalPoolMembers": ["${var.repo_approvers_arn}"]
     }]
 }

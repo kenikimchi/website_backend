@@ -173,6 +173,13 @@ data "aws_iam_policy_document" "pipeline_policy" {
 
     resources = ["arn:${data.aws_partition.current.partition}:logs:${data.aws_region.current.id}:${data.aws_caller_identity.current.account_id}:log-group:*"]
   }
+
+  statement {
+    effect = "Allow"
+
+    actions   = ["codestar-connections:UseConnection"]
+    resources = [aws_codestarconnections_connection.GitHub.arn]
+  }
 }
 
 resource "aws_iam_role_policy" "pipeline_policy" {
