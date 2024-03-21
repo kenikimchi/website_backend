@@ -11,11 +11,11 @@ resource "aws_s3_bucket" "www" {
 }
 
 resource "aws_s3_bucket" "pipeline_bucket" {
-  bucket = "kendrickkim-pipelinebucket"
+  bucket = var.pipeline_bucket
 }
 
 resource "aws_s3_bucket" "lambda_dependencies" {
-  bucket = "kendrickkim-lambdadependencies"
+  bucket = var.lambda_dependencies
 }
 
 resource "aws_s3_bucket_website_configuration" "root" {
@@ -41,6 +41,16 @@ resource "aws_s3_bucket_website_configuration" "www" {
 
 resource "aws_s3_bucket_public_access_block" "www" {
   bucket = aws_s3_bucket.www.id
+}
+
+# State file bucket
+resource "aws_s3_bucket" "tf_bucket" {
+  bucket = var.tf_bucket_name
+}
+
+resource "aws_s3_object" "terraform_folder" {
+  bucket = aws_s3_bucket.tf_bucket.id
+  key    = "terraform.tfstate"
 }
 
 # Bucket Policies
@@ -78,4 +88,33 @@ data "aws_iam_policy_document" "pipeline_access" {
     actions   = ["s3:PutObject", "s3:GetObject"]
     resources = ["${aws_s3_bucket.pipeline_bucket.arn}/*"]
   }
+}
+
+# Policy for Terraform bucket
+resource "aws_s3_bucket_acl" "tf_bucket_acl" {
+  depends_on = [aws_s3_bucket_ownership_controls.tf_bucket_acl_ownership]
+  bucket     = aws_s3_bucket.tf_bucket.id
+  acl        = "private"
+}
+
+resource "aws_s3_bucket_ownership_controls" "tf_bucket_acl_ownership" {
+  bucket = aws_s3_bucket.tf_bucket.id
+  rule {
+    object_ownership = "ObjectWriter"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "tf_bucket_versioning" {
+  bucket = aws_s3_bucket.tf_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "tf_bucket_access" {
+  bucket                  = aws_s3_bucket.tf_bucket.bucket
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }

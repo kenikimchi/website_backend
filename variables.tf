@@ -4,6 +4,21 @@ variable "domain_name" {
   type        = string
 }
 
+variable "pipeline_bucket" {
+  description = "Name of the pipeline bucket"
+  type        = string
+}
+
+variable "tf_bucket_name" {
+  description = "Name of the Terraform bucket"
+  type        = string
+}
+
+variable "lambda_dependencies" {
+  description = "Name of the bucket that holds Lambda dependencies"
+  type        = string
+}
+
 # CloudFront
 variable "origin_access_type" {
   description = "Origin access type"
@@ -35,4 +50,95 @@ variable "private_zone" {
   description = "Certificate private zone or not"
   type        = bool
   default     = false
+}
+
+# CodeCommit
+variable "source_repo_name" {
+  description = "The name of the source repository"
+  type        = string
+}
+
+variable "source_repo_branch" {
+  description = "Repository branch of the source repository"
+  type        = string
+}
+
+variable "repo_approvers_arn" {
+  description = "ARN of the approver"
+  type        = string
+}
+
+# CodeBuild
+variable "build_stages" {
+  description = "Stages used in the pipeline"
+  type        = list(string)
+}
+
+variable "project_name" {
+  description = "Name of the pipeline project"
+  type        = string
+}
+
+variable "artifacts_type" {
+  description = "Type of artifact outputed by CodeBuild"
+  type        = string
+}
+
+variable "environment_compute_type" {
+  description = "Information about the compute resources CodeBuild will use"
+  type        = string
+}
+
+variable "environment_image" {
+  description = "The specified image of the CodeBuild environment"
+  type        = string
+}
+
+variable "environment_type" {
+  description = "Type of build environemnt to use for builds"
+  type        = string
+}
+
+variable "image_pull_credentials_type" {
+  description = "Type of credentials CodeBuild will use to pull image"
+  type        = string
+}
+
+variable "source_type" {
+  type    = string
+  default = "CODEPIPELINE"
+}
+
+variable "source_location" {
+  type = string
+}
+
+variable "codebuild_policy_name" {
+  type = string
+}
+
+variable "codebuild_iam_role_name" {
+  type = string
+}
+
+# CodePipeline
+variable "stages" {
+  description = "Stages in the pipeline"
+  type        = list(map(any))
+}
+
+variable "full_repo_id" {
+  description = "The full repository id"
+  type        = string
+}
+
+variable "codepipeline_iam_role_name" {
+  description = "Name of the pipeline role"
+  type        = string
+}
+
+# DynamoDB
+variable "tfstate_table_name" {
+  description = "Name of the dynamodb table containing the tfsate lock data"
+  type        = string
 }
