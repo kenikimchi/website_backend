@@ -85,8 +85,8 @@ resource "aws_s3_bucket_policy" "pipeline_access" {
 data "aws_iam_policy_document" "pipeline_access" {
   statement {
     principals {
-      type        = "Service"
-      identifiers = ["codepipeline.amazonaws.com"]
+      type        = "AWS"
+      identifiers = [var.codepipeline_role_arn]
     }
 
     effect = "Allow"

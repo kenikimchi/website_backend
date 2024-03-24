@@ -19,11 +19,12 @@ provider "aws" {
 module "s3" {
   source = "./modules/s3"
 
-  domain_name         = var.domain_name
-  pipeline_bucket     = var.pipeline_bucket
-  lambda_dependencies = var.lambda_dependencies
-  tf_bucket_name      = var.tf_bucket_name
-  logging_bucket_name = var.logging_bucket_name
+  domain_name           = var.domain_name
+  pipeline_bucket       = var.pipeline_bucket
+  lambda_dependencies   = var.lambda_dependencies
+  tf_bucket_name        = var.tf_bucket_name
+  logging_bucket_name   = var.logging_bucket_name
+  codepipeline_role_arn = module.codepipeline.codepipeline_role_arn
 }
 
 module "cloudfront" {
