@@ -78,11 +78,11 @@ module "codepipeline" {
 
   stages                     = var.stages
   project_name               = var.project_name
-  pipeline_bucket_id         = module.s3.pipeline_bucket_id
   full_repo_id               = var.full_repo_id
   pipeline_bucket_arn        = module.s3.pipeline_bucket_arn
   source_repository_name     = var.source_repo_name
   codepipeline_iam_role_name = var.codepipeline_iam_role_name
+  pipeline_bucket_bucket     = module.s3.pipeline_bucket_bucket
 }
 
 # DynamoDB

@@ -84,9 +84,11 @@ data "aws_iam_policy_document" "pipeline_access" {
       identifiers = ["codepipeline.amazonaws.com"]
     }
 
-    effect    = "Allow"
-    actions   = ["s3:PutObject", "s3:GetObject"]
-    resources = ["${aws_s3_bucket.pipeline_bucket.arn}/*"]
+    effect = "Allow"
+    actions = [
+      "s3:*"
+    ]
+    resources = [aws_s3_bucket.pipeline_bucket.arn, "${aws_s3_bucket.pipeline_bucket.arn}/*"]
   }
 }
 

@@ -9,11 +9,11 @@ variable "artifacts_store_type" {
   default = "S3"
 }
 
-variable "pipeline_bucket_id" {
+variable "pipeline_bucket_arn" {
   type = string
 }
 
-variable "pipeline_bucket_arn" {
+variable "pipeline_bucket_bucket" {
   type = string
 }
 

@@ -11,7 +11,7 @@ resource "aws_codepipeline" "terraform_pipeline" {
   role_arn = aws_iam_role.pipeline_role.arn
 
   artifact_store {
-    location = var.pipeline_bucket_id
+    location = var.pipeline_bucket_bucket
     type     = "S3"
   }
 
@@ -29,9 +29,10 @@ resource "aws_codepipeline" "terraform_pipeline" {
       run_order        = 1
 
       configuration = {
-        FullRepositoryId = var.full_repo_id
-        BranchName       = var.branch_name
-        ConnectionArn    = aws_codestarconnections_connection.GitHub.arn
+        FullRepositoryId     = var.full_repo_id
+        BranchName           = var.branch_name
+        ConnectionArn        = aws_codestarconnections_connection.GitHub.arn
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
       }
     }
   }
@@ -83,13 +84,10 @@ data "aws_iam_policy_document" "pipeline_policy" {
     effect = "Allow"
 
     actions = [
-      "s3:GetObject",
-      "s3:GetObjectVersion",
-      "s3:PutObjectAcl",
-      "s3:PutObject"
+      "s3:*"
     ]
 
-    resources = ["${var.pipeline_bucket_arn}./"]
+    resources = ["${var.pipeline_bucket_arn}./", var.pipeline_bucket_arn]
   }
 
   statement {

@@ -137,8 +137,17 @@ variable "codepipeline_iam_role_name" {
   type        = string
 }
 
+variable "source_provider" {
+  type = string
+}
+
 # DynamoDB
 variable "tfstate_table_name" {
   description = "Name of the dynamodb table containing the tfsate lock data"
+  type        = string
+}
+
+variable "branch_name" {
+  description = "The repository branch for the source stage to pull from"
   type        = string
 }
