@@ -17,3 +17,8 @@ variable "tf_bucket_name" {
   description = "value"
   type        = string
 }
+
+variable "logging_bucket_name" {
+  description = "Name of the logging bucket"
+  type        = string
+}

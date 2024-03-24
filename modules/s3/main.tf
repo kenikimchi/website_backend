@@ -43,6 +43,11 @@ resource "aws_s3_bucket_public_access_block" "www" {
   bucket = aws_s3_bucket.www.id
 }
 
+# Logging Bucket
+resource "aws_s3_bucket" "logging_bucket" {
+  bucket = var.logging_bucket_name
+}
+
 # State file bucket
 resource "aws_s3_bucket" "tf_bucket" {
   bucket = var.tf_bucket_name

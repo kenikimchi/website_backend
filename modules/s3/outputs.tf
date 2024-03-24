@@ -9,7 +9,3 @@ output "pipeline_bucket_id" {
 output "pipeline_bucket_arn" {
   value = aws_s3_bucket.pipeline_bucket.arn
 }
-
-output "pipeline_bucket_bucket" {
-  value = aws_s3_bucket.pipeline_bucket.bucket
-}

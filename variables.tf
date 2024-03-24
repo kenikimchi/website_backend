@@ -19,6 +19,11 @@ variable "lambda_dependencies" {
   type        = string
 }
 
+variable "logging_bucket_name" {
+  description = "Name of the logging bucket"
+  type        = string
+}
+
 # CloudFront
 variable "origin_access_type" {
   description = "Origin access type"
@@ -149,5 +154,16 @@ variable "tfstate_table_name" {
 
 variable "branch_name" {
   description = "The repository branch for the source stage to pull from"
+  type        = string
+}
+
+# CloudWatch
+variable "pipeline_log_group_name" {
+  description = "The name of the log group for CodePipeline"
+  type        = string
+}
+
+variable "pipeline_log_stream_name" {
+  description = "The name of the log stream for CodePipeline"
   type        = string
 }

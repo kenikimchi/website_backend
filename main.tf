@@ -23,6 +23,7 @@ module "s3" {
   pipeline_bucket     = var.pipeline_bucket
   lambda_dependencies = var.lambda_dependencies
   tf_bucket_name      = var.tf_bucket_name
+  logging_bucket_name = var.logging_bucket_name
 }
 
 module "cloudfront" {
@@ -82,7 +83,8 @@ module "codepipeline" {
   pipeline_bucket_arn        = module.s3.pipeline_bucket_arn
   source_repository_name     = var.source_repo_name
   codepipeline_iam_role_name = var.codepipeline_iam_role_name
-  pipeline_bucket_bucket     = module.s3.pipeline_bucket_bucket
+  pipeline_bucket_id         = module.s3.pipeline_bucket_id
+  kms_key_arn                = module.kms.kms_key_arn
 }
 
 # DynamoDB
@@ -90,4 +92,19 @@ module "dynamodb" {
   source = "./modules/dynamodb"
 
   tfstate_table_name = var.tfstate_table_name
+}
+
+# CloudWatch
+module "cloudwatch" {
+  source = "./modules/cloudwatch"
+
+  pipeline_log_group_name  = var.pipeline_log_group_name
+  pipeline_log_stream_name = var.pipeline_log_stream_name
+}
+
+# KMS
+module "kms" {
+  source = "./modules/kms"
+
+  codepipeline_role_arn = module.codepipeline.codepipeline_role_arn
 }

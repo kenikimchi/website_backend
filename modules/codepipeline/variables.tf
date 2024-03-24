@@ -13,7 +13,7 @@ variable "pipeline_bucket_arn" {
   type = string
 }
 
-variable "pipeline_bucket_bucket" {
+variable "pipeline_bucket_id" {
   type = string
 }
 
@@ -66,4 +66,9 @@ variable "create_new_role" {
   type        = bool
   description = "Flag for deciding if a new role needs to be created"
   default     = true
+}
+
+variable "kms_key_arn" {
+  description = "KMS Key arn of the encryption key used for encrypting bucket objects"
+  type        = string
 }

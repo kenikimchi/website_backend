@@ -11,7 +11,7 @@ resource "aws_codepipeline" "terraform_pipeline" {
   role_arn = aws_iam_role.pipeline_role.arn
 
   artifact_store {
-    location = var.pipeline_bucket_bucket
+    location = var.pipeline_bucket_id
     type     = "S3"
   }
 
@@ -90,29 +90,20 @@ data "aws_iam_policy_document" "pipeline_policy" {
     resources = ["${var.pipeline_bucket_arn}./", var.pipeline_bucket_arn]
   }
 
+
   statement {
     effect = "Allow"
 
     actions = [
-      "s3:GetBucketVersioning"
+      "kms:DescribeKey",
+      "kms:GenerateDataKey",
+      "kms:Encrypt",
+      "kms:ReEncrypt*",
+      "kms:Decrypt"
     ]
 
-    resources = [var.pipeline_bucket_arn]
+    resources = [var.kms_key_arn]
   }
-
-  # statement {
-  #   effect = "Allow"
-
-  #   actions = [
-  #     "kms:DescribeKey",
-  #     "kms:GenerateDataKey",
-  #     "kms:Encrypt",
-  #     "kms:ReEncrypt*",
-  #     "kms:Decrypt"
-  #   ]
-
-  #   resources = [var.kms_key_arn]
-  # }
 
   statement {
     effect = "Allow"

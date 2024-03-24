@@ -1,3 +1,3 @@
-output "codebuild_role" {
+output "codepipeline_role_arn" {
   value = aws_iam_role.pipeline_role.arn
 }
