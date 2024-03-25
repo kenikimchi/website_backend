@@ -69,6 +69,12 @@ data "aws_iam_policy_document" "codebuild_role" {
     ]
     resources = ["${var.tfstate_table_arn}"]
   }
+
+  statement {
+    effect    = "Allow"
+    actions   = ["codestar-connections:UseConnection"]
+    resources = [var.codestarconnection_github_arn]
+  }
 }
 
 resource "aws_iam_role_policy" "codebuild_policy" {

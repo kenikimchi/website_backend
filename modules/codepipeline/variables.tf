@@ -72,3 +72,7 @@ variable "kms_key_arn" {
   description = "KMS Key arn of the encryption key used for encrypting bucket objects"
   type        = string
 }
+
+variable "codestarconnection_github_arn" {
+  description = "ARN of the codestar connection used to connect to github"
+}

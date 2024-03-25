@@ -3,12 +3,6 @@ variable "project_name" {
   type        = string
 }
 
-variable "role_arn" {
-  description = "Codepipeline IAM role arn. "
-  type        = string
-  default     = ""
-}
-
 variable "build_stages" {
   description = "List of Names of the CodeBuild projects to be created"
   type        = list(string)
@@ -62,4 +56,9 @@ variable "pipeline_bucket_arn" {
 
 variable "tfstate_table_arn" {
   type = string
+}
+
+variable "codestarconnection_github_arn" {
+  description = "The CodeStar Connection arn connecting to GitHub"
+  type        = string
 }

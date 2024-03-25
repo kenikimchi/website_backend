@@ -1,8 +1,3 @@
-# GitHub Connection
-resource "aws_codestarconnections_connection" "GitHub" {
-  name          = "GitHub"
-  provider_type = "GitHub"
-}
 
 # Terraform Pipeline
 resource "aws_codepipeline" "terraform_pipeline" {
@@ -31,7 +26,7 @@ resource "aws_codepipeline" "terraform_pipeline" {
       configuration = {
         FullRepositoryId     = var.full_repo_id
         BranchName           = var.branch_name
-        ConnectionArn        = aws_codestarconnections_connection.GitHub.arn
+        ConnectionArn        = var.codestarconnection_github_arn
         OutputArtifactFormat = "CODEBUILD_CLONE_REF"
       }
     }
@@ -167,7 +162,7 @@ data "aws_iam_policy_document" "pipeline_policy" {
     effect = "Allow"
 
     actions   = ["codestar-connections:UseConnection"]
-    resources = [aws_codestarconnections_connection.GitHub.arn]
+    resources = [var.codestarconnection_github_arn]
   }
 }
 

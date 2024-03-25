@@ -1,5 +1,11 @@
 # CodeCommit
 
+# GitHub Connection
+resource "aws_codestarconnections_connection" "GitHub" {
+  name          = "GitHub"
+  provider_type = "GitHub"
+}
+
 resource "aws_codecommit_repository" "source_repository" {
   repository_name = var.source_repository_name
   default_branch  = var.source_repository_branch
