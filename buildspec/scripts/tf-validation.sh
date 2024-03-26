@@ -14,4 +14,5 @@ then
   echo "Validations passed"
 else
   echo "Validations failed"
-  exit 1
+  exit 1;
+fi
