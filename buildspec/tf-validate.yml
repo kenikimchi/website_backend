@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     CODE_SRC_DIR: "."
-    SCRIPT_DIR: "buildspec/scripts"
+    SCRIPT_DIR: "./buildspec/scripts"
     TF_VERSION: "1.7.4"
     ENVIRONMENT: "main"
 
@@ -24,7 +24,7 @@ phases:
       - "cd ${CODEBUILD_SRC_DIR}/${CODE_SRC_DIR}"
       - "terraform init"
       - "mkdir -p ${CODEBUILD_SRC_DIR}/reports"
-      - "/bin/bash ${CODEBUILD_SRC_DIR}/${SCRIPT_DIR}/tf_validation.sh"
+      - "/bin/bash ${CODEBUILD_SRC_DIR}/${SCRIPT_DIR}/tf-validation.sh"
 artifacts:
   files:
     - '**/*'
