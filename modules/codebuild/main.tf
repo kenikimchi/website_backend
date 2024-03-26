@@ -27,7 +27,7 @@ resource "aws_codebuild_project" "tfbuild" {
     type            = var.source_type
     location        = var.source_location
     git_clone_depth = 1
-    buildspec       = "./buildspec/tf-${var.build_stages[count.index]}.yml"
+    buildspec       = "./buildspec/tf-${var.build_stages[count.index]}.yaml"
   }
 }
 
