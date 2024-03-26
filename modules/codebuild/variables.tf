@@ -58,6 +58,11 @@ variable "tfstate_table_arn" {
   type = string
 }
 
+variable "tfstate_bucket_arn" {
+  description = "Bucket arn where the tfstate file is stored"
+  type        = string
+}
+
 variable "codestarconnection_github_arn" {
   description = "The CodeStar Connection arn connecting to GitHub"
   type        = string

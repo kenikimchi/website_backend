@@ -25,6 +25,7 @@ module "s3" {
   tf_bucket_name        = var.tf_bucket_name
   logging_bucket_name   = var.logging_bucket_name
   codepipeline_role_arn = module.codepipeline.codepipeline_role_arn
+  codebuild_role_arn    = module.codebuild.codebuild_role_arn
 }
 
 module "cloudfront" {
@@ -73,6 +74,7 @@ module "codebuild" {
   pipeline_bucket_arn           = module.s3.pipeline_bucket_arn
   tfstate_table_arn             = module.dynamodb.tfstate_table_arn
   codestarconnection_github_arn = module.codecommit.codestarconnection_github_arn
+  tfstate_bucket_arn            = module.s3.tfstate_bucket_arn
 }
 
 module "codepipeline" {

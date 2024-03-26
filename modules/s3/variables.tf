@@ -25,4 +25,10 @@ variable "logging_bucket_name" {
 
 variable "codepipeline_role_arn" {
   description = "Role arn used by codepipeline"
+  type        = string
+}
+
+variable "codebuild_role_arn" {
+  description = "Role arn used by codebuild"
+  type        = string
 }

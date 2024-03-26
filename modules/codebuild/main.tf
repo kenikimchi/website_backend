@@ -49,7 +49,10 @@ data "aws_iam_policy_document" "codebuild_role" {
     ]
     resources = [
       "${var.pipeline_bucket_arn}/*",
-      "${var.pipeline_bucket_arn}"
+      var.pipeline_bucket_arn,
+      var.tfstate_bucket_arn,
+      "${var.tfstate_bucket_arn}/*"
+
     ]
     effect = "Allow"
   }

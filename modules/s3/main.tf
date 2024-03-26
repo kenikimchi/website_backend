@@ -125,3 +125,27 @@ resource "aws_s3_bucket_public_access_block" "tf_bucket_access" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+data "aws_iam_policy_document" "tfstate_bucket_policy" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = [var.codepipeline_role_arn, var.codebuild_role_arn]
+    }
+
+    effect    = "Allow"
+    actions   = ["s3:ListBucket"]
+    resources = [aws_s3_bucket.tf_bucket.arn]
+  }
+
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = [var.codepipeline_role_arn, var.codebuild_role_arn]
+    }
+
+    effect    = "Allow"
+    actions   = ["s3:GetObject", "s3:PutObject"]
+    resources = ["${aws_s3_bucket.tf_bucket.arn}/terraform.tfstate"]
+  }
+}
