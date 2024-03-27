@@ -39,44 +39,69 @@ data "aws_iam_policy_document" "codebuild_role" {
     effect    = "Allow"
   }
 
-  statement {
-    actions = [
-      "s3:List*",
-      "s3:Get*",
-      "s3:Put*",
-      "s3:DeleteObject",
-      "s3:DeleteObjectVersion"
-    ]
-    resources = [
-      "${var.pipeline_bucket_arn}/*",
-      var.pipeline_bucket_arn,
-      var.tfstate_bucket_arn,
-      "${var.tfstate_bucket_arn}/*"
+  # statement {
+  #   actions = [
+  #     "s3:List*",
+  #     "s3:Get*",
+  #     "s3:Put*",
+  #     "s3:DeleteObject",
+  #     "s3:DeleteObjectVersion"
+  #   ]
+  #   resources = [
+  #     "${var.pipeline_bucket_arn}/*",
+  #     var.pipeline_bucket_arn,
+  #     var.tfstate_bucket_arn,
+  #     "${var.tfstate_bucket_arn}/*"
 
-    ]
-    effect = "Allow"
-  }
+  #   ]
+  #   effect = "Allow"
+  # }
 
-  statement {
-    effect = "Allow"
-    actions = [
-      "dynamodb:BatchGetItem",
-      "dynamodb:Query",
-      "dynamodb:PutItem",
-      "dynamodb:UpdateItem",
-      "dynamodb:DeleteItem",
-      "dynamodb:BatchWriteItem",
-      "dynamodb:Describe*",
-      "dynamodb:Get*",
-      "dynamodb:List*"
-    ]
-    resources = ["${var.tfstate_table_arn}"]
-  }
+  # statement {
+  #   effect = "Allow"
+  #   actions = [
+  #     "dynamodb:BatchGetItem",
+  #     "dynamodb:Query",
+  #     "dynamodb:PutItem",
+  #     "dynamodb:UpdateItem",
+  #     "dynamodb:DeleteItem",
+  #     "dynamodb:BatchWriteItem",
+  #     "dynamodb:Describe*",
+  #     "dynamodb:Get*",
+  #     "dynamodb:List*"
+  #   ]
+  #   resources = ["${var.tfstate_table_arn}"]
+  # }
 
   statement {
     effect    = "Allow"
     actions   = ["codestar-connections:UseConnection"]
     resources = [var.codestarconnection_github_arn]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "apigateway:*",
+      "dynamodb:*",
+      "cloudwatch:*",
+      "route53:*",
+      "route53domains:*",
+      "cloudfront:*",
+      "s3:*",
+      "sns:*",
+      "ec2:*",
+      "iam:*",
+      "acm:*",
+      "codebuild:*",
+      "codecommit:*",
+      "events:*",
+      "lambda:*",
+      "codestar-notifications:*",
+      "cloudformation:*",
+      "kms:*"
+    ]
+    resources = ["*"]
   }
 }
 
