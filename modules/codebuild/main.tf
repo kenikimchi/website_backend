@@ -77,7 +77,8 @@ data "aws_iam_policy_document" "codebuild_role" {
     effect    = "Allow"
     actions   = [
       "codestar-connections:UseConnection",
-      "codestar-connections:GetConnection"
+      "codestar-connections:GetConnection",
+      "codestar-connections:List*"
     ]
     resources = [var.codestarconnection_github_arn]
   }
@@ -98,6 +99,7 @@ data "aws_iam_policy_document" "codebuild_role" {
       "acm:*",
       "codebuild:*",
       "codecommit:*",
+      "codepipeline:*",
       "events:*",
       "lambda:*",
       "codestar-notifications:*",
