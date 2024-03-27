@@ -31,7 +31,6 @@ stages = [
   { name = "validate", category = "Test", owner = "AWS", provider = "CodeBuild", input_artifacts = "source_output", output_artifacts = "validate_output" },
   { name = "plan", category = "Test", owner = "AWS", provider = "CodeBuild", input_artifacts = "validate_output", output_artifacts = "plan_output" },
   { name = "apply", category = "Build", owner = "AWS", provider = "CodeBuild", input_artifacts = "plan_output", output_artifacts = "apply_output" },
-  { name = "destroy", category = "Build", owner = "AWS", provider = "CodeBuild", input_artifacts = "apply_output", output_artifacts = "destroy_output" }
 ]
 codepipeline_iam_role_name = "kendrickkim_codepipeline_role"
 branch_name                = "main"
