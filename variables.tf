@@ -167,3 +167,8 @@ variable "pipeline_log_stream_name" {
   description = "The name of the log stream for CodePipeline"
   type        = string
 }
+
+# Lambda
+variable "lambda_function_name" {
+  type = string
+}

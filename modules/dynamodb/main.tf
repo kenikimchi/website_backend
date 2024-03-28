@@ -14,3 +14,15 @@ resource "aws_dynamodb_table" "tfstate_lock" {
     enabled = true
   }
 }
+
+# Page Visitors Table
+resource "aws_dynamodb_table" "page_count" {
+  name         = "Page_Count"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "Index"
+
+  attribute {
+    name = "Index"
+    type = "N"
+  }
+}

@@ -13,3 +13,7 @@ output "pipeline_bucket_arn" {
 output "tfstate_bucket_arn" {
   value = aws_s3_bucket.tf_bucket.arn
 }
+
+output "dependencies_bucket_arn" {
+  value = aws_s3_bucket.lambda_dependencies.arn
+}

@@ -74,8 +74,8 @@ data "aws_iam_policy_document" "codebuild_role" {
   # }
 
   statement {
-    effect    = "Allow"
-    actions   = [
+    effect = "Allow"
+    actions = [
       "codestar-connections:UseConnection",
       "codestar-connections:GetConnection",
       "codestar-connections:List*"
