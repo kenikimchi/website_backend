@@ -135,7 +135,7 @@ data "aws_iam_policy_document" "tfstate_bucket_policy" {
 
     effect    = "Allow"
     actions   = ["s3:ListBucket"]
-    resources = [aws_s3_bucket.tf_bucket.arn]
+    resources = [aws_s3_bucket.tf_bucket.arn, aws_s3_bucket.lambda_dependencies.arn]
   }
 
   statement {
@@ -146,6 +146,6 @@ data "aws_iam_policy_document" "tfstate_bucket_policy" {
 
     effect    = "Allow"
     actions   = ["s3:GetObject", "s3:PutObject"]
-    resources = ["${aws_s3_bucket.tf_bucket.arn}/terraform.tfstate"]
+    resources = ["${aws_s3_bucket.tf_bucket.arn}/terraform.tfstate", "${aws_s3_bucket.lambda_dependencies.arn}/*"]
   }
 }
