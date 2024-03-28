@@ -172,3 +172,16 @@ variable "pipeline_log_stream_name" {
 variable "lambda_function_name" {
   type = string
 }
+
+# API Gateway
+variable "apigateway_name" {
+  type = string
+}
+
+variable "api_stage_name" {
+  type = string
+}
+
+variable "cors_allowed_origins" {
+  type = list(string)
+}

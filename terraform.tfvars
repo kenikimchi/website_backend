@@ -50,3 +50,8 @@ pipeline_log_stream_name = "kendrickkim-codepipeline-logstream"
 
 # Lambda
 lambda_function_name = "dynamodb_writer"
+
+# API Gateway
+apigateway_name      = "site_gateway"
+api_stage_name       = "prod"
+cors_allowed_origins = ["https://www.kendrickkim.com"]

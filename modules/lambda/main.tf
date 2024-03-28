@@ -3,22 +3,22 @@
 data "archive_file" "lambda_writer_function" {
   type = "zip"
 
-  source_dir  = "functions/dbWriter.py"
-  output_path = "functions/dbWriter.zip"
+  source_dir  = "${path.module}/functions"
+  output_path = "${path.module}/functions/payload.zip"
 }
 
 # Upload archive to s3
 resource "aws_s3_object" "lambda_writer_function" {
   bucket = var.dependencies_bucket
-  key    = "functions/dbWriter.zip"
+  key    = "payload.zip"
   source = data.archive_file.lambda_writer_function.output_path
 }
 
 resource "aws_lambda_function" "db_writer" {
   function_name = var.lambda_function_name
   role          = aws_iam_role.lambda_assume_role.arn
-  filename      = "dbWriter.zip"
-  handler       = "dbWriter.lambda_handler"
+  filename      = "payload.zip"
+  handler       = "payload.lambda_handler"
   runtime       = "python3.12"
 
   layers = [aws_lambda_layer_version.dependencies.arn]
@@ -35,7 +35,7 @@ resource "aws_lambda_layer_version" "dependencies" {
 resource "aws_lambda_permission" "allow_api_gateway" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.writeDynamoDB.function_name
+  function_name = aws_lambda_function.db_writer.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = var.api_gateway_execution_arn
 }
@@ -72,6 +72,6 @@ resource "aws_iam_policy" "lambdaIamPolicy" {
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_attachments" {
-  role       = aws_iam_role.iamLambda.name
+  role       = aws_iam_role.lambda_assume_role.name
   policy_arn = aws_iam_policy.lambdaIamPolicy.arn
 }

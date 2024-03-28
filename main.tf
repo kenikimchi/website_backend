@@ -113,7 +113,7 @@ module "lambda" {
 
   lambda_function_name      = var.lambda_function_name
   api_gateway_execution_arn = module.apigateway.apigatewayv2_api_arn
-  pagecount_database        = module.dynamodb.pagecount_database_arn
+  pagecount_database        = [module.dynamodb.pagecount_database_arn]
   dependencies_bucket       = module.s3.dependencies_bucket_arn
 }
 
@@ -122,4 +122,15 @@ module "kms" {
   source = "./modules/kms"
 
   codepipeline_role_arn = module.codepipeline.codepipeline_role_arn
+}
+
+# API Gateway
+module "apigateway" {
+  source = "./modules/apigateway"
+
+  apigateway_name      = var.apigateway_name
+  integration_uri      = module.lambda.integration_uri
+  api_stage_name       = var.api_stage_name
+  cors_allowed_origins = var.cors_allowed_origins
+
 }
