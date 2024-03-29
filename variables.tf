@@ -168,6 +168,11 @@ variable "pipeline_log_stream_name" {
   type        = string
 }
 
+variable "apigateway_group_name" {
+  description = "Name of the apigateway log group"
+  type = string
+}
+
 # Lambda
 variable "lambda_function_name" {
   type = string

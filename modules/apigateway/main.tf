@@ -16,6 +16,11 @@ resource "aws_apigatewayv2_stage" "api_stage" {
 
   name        = var.api_stage_name
   auto_deploy = true
+
+  access_log_settings {
+    destination_arn = var.apigateway_cwlogs_arn
+    format = "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime]\"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId $context.extendedRequestId"
+  }
 }
 
 resource "aws_apigatewayv2_integration" "api_integration" {

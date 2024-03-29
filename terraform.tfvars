@@ -47,6 +47,7 @@ tfstate_table_name = "tf-statelock"
 # CloudWatch
 pipeline_log_group_name  = "kendrickkim-codepipeline-loggroup"
 pipeline_log_stream_name = "kendrickkim-codepipeline-logstream"
+apigateway_group_name = "kendrickkim-apigateway-loggroup"
 
 # Lambda
 lambda_function_name = "dynamodb_writer"

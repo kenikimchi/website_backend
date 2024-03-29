@@ -17,3 +17,8 @@ variable "integration_uri" {
   description = "Invoke arn of the lambda function"
   type        = string
 }
+
+variable "apigateway_cwlogs_arn" {
+  description = "ARN of the cloudwatch log group"
+  type = string
+}
