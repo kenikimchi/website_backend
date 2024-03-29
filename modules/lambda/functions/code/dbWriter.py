@@ -1,7 +1,7 @@
 import boto3
 import simplejson as json
 
-tableName = 'PageVisitors'
+tableName = 'Page_Count'
 dynamo = boto3.resource('dynamodb').Table(tableName)
 
 print('Loading function')
