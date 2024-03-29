@@ -104,7 +104,8 @@ data "aws_iam_policy_document" "codebuild_role" {
       "lambda:*",
       "codestar-notifications:*",
       "cloudformation:*",
-      "kms:*"
+      "kms:*",
+      "logs:*"
     ]
     resources = ["*"]
   }
