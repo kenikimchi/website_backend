@@ -38,7 +38,7 @@ resource "aws_lambda_permission" "allow_api_gateway" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.db_writer.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = var.api_gateway_execution_arn
+  source_arn    = "${var.api_gateway_execution_arn}/*"
 }
 
 data "aws_iam_policy_document" "assume_role" {
