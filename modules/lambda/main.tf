@@ -3,7 +3,7 @@
 data "archive_file" "lambda_writer_function" {
   type = "zip"
 
-  source_dir  = "${path.module}/functions"
+  source_dir  = "${path.module}/functions/code"
   output_path = "${path.module}/functions/payload.zip"
 }
 
