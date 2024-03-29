@@ -29,5 +29,5 @@ resource "aws_apigatewayv2_integration" "api_integration" {
 resource "aws_apigatewayv2_route" "lambda_route" {
   api_id    = aws_apigatewayv2_api.site_api.id
   route_key = "POST /{proxy+}"
-  target    = "integration/${aws_apigatewayv2_integration.api_integration.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.api_integration.id}"
 }
