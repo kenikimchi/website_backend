@@ -9,7 +9,7 @@ print('Loading function')
 def lambda_handler(event, context):
     
     params = dynamo.update_item(
-        TableName='PageVisitors',
+        TableName='Page_Count',
         Key={
             'Index': 0
         },
@@ -23,7 +23,7 @@ def lambda_handler(event, context):
         
     
     dynamo.get_item(
-        TableName = 'PageVisitors',
+        TableName = 'Page_Count',
         Key = {
             'Index': 0
         },

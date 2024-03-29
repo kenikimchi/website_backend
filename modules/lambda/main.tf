@@ -19,7 +19,7 @@ resource "aws_lambda_function" "db_writer" {
   role          = aws_iam_role.lambda_assume_role.arn
   s3_bucket     = var.dependencies_bucket
   s3_key        = "payload.zip"
-  handler       = "payload.lambda_handler"
+  handler       = "dbWriter.lambda_handler"
   runtime       = "python3.12"
 
   layers = [aws_lambda_layer_version.dependencies.arn]
