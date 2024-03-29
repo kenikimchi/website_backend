@@ -114,7 +114,7 @@ module "lambda" {
   lambda_function_name      = var.lambda_function_name
   api_gateway_execution_arn = module.apigateway.apigatewayv2_api_arn
   pagecount_database        = [module.dynamodb.pagecount_database_arn]
-  dependencies_bucket       = module.s3.dependencies_bucket_arn
+  dependencies_bucket       = module.s3.dependencies_bucket_id
 }
 
 # KMS
