@@ -17,7 +17,8 @@ resource "aws_s3_object" "lambda_writer_function" {
 resource "aws_lambda_function" "db_writer" {
   function_name = var.lambda_function_name
   role          = aws_iam_role.lambda_assume_role.arn
-  filename      = "payload.zip"
+  s3_bucket     = var.dependencies_bucket
+  s3_key        = "payload.zip"
   handler       = "payload.lambda_handler"
   runtime       = "python3.12"
 
