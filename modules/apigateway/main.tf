@@ -71,7 +71,8 @@ data "aws_iam_policy_document" "cloudwatch" {
       "logs:DescribeLogStreams",
       "logs:PutLogEvents",
       "logs:GetLogEvents",
-      "logs:FilterLogEvents"
+      "logs:FilterLogEvents",
+      "lambda:InvokeFunction"
     ]
 
     resources = ["*"]
