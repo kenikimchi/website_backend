@@ -20,5 +20,15 @@ variable "integration_uri" {
 
 variable "apigateway_cwlogs_arn" {
   description = "ARN of the cloudwatch log group"
-  type = string
+  type        = string
+}
+
+variable "apigateway_log_format" {
+  description = "Format of logs sent to CloudWatch"
+  type        = string
+}
+
+variable "bikestation_integration_uri" {
+  description = "HTTP URL of the bikestation API"
+  type        = string
 }

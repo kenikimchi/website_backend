@@ -47,12 +47,14 @@ tfstate_table_name = "tf-statelock"
 # CloudWatch
 pipeline_log_group_name  = "kendrickkim-codepipeline-loggroup"
 pipeline_log_stream_name = "kendrickkim-codepipeline-logstream"
-apigateway_group_name = "kendrickkim-apigateway-loggroup"
+apigateway_group_name    = "kendrickkim-apigateway-loggroup"
 
 # Lambda
 lambda_function_name = "dynamodb_writer"
 
 # API Gateway
-apigateway_name      = "site_gateway"
-api_stage_name       = "prod"
-cors_allowed_origins = ["https://www.kendrickkim.com"]
+apigateway_name             = "site_gateway"
+api_stage_name              = "prod"
+cors_allowed_origins        = ["https://www.kendrickkim.com"]
+apigateway_log_format       = "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime]\"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId $context.extendedRequestId"
+bikestation_integration_uri = "https://gbfs.lyft.com/gbfs/1.1/chi/en/station_status.json"

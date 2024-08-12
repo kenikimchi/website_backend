@@ -170,7 +170,7 @@ variable "pipeline_log_stream_name" {
 
 variable "apigateway_group_name" {
   description = "Name of the apigateway log group"
-  type = string
+  type        = string
 }
 
 # Lambda
@@ -189,4 +189,12 @@ variable "api_stage_name" {
 
 variable "cors_allowed_origins" {
   type = list(string)
+}
+
+variable "apigateway_log_format" {
+  type = string
+}
+
+variable "bikestation_integration_uri" {
+  type = string
 }

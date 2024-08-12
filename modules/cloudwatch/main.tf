@@ -11,6 +11,6 @@ resource "aws_cloudwatch_log_stream" "pipeline_log_stream" {
 }
 
 resource "aws_cloudwatch_log_group" "api_gateway_log_group" {
-  name = var.apigateway_group_name
+  name            = var.apigateway_group_name
   log_group_class = "STANDARD"
 }

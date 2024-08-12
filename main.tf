@@ -105,7 +105,7 @@ module "cloudwatch" {
 
   pipeline_log_group_name  = var.pipeline_log_group_name
   pipeline_log_stream_name = var.pipeline_log_stream_name
-  apigateway_group_name = var.apigateway_group_name
+  apigateway_group_name    = var.apigateway_group_name
 }
 
 # Lambda
@@ -129,9 +129,11 @@ module "kms" {
 module "apigateway" {
   source = "./modules/apigateway"
 
-  apigateway_name      = var.apigateway_name
-  integration_uri      = module.lambda.integration_uri
-  api_stage_name       = var.api_stage_name
-  cors_allowed_origins = var.cors_allowed_origins
-  apigateway_cwlogs_arn = module.cloudwatch.apigateway_cwlogs_arn
+  apigateway_name             = var.apigateway_name
+  integration_uri             = module.lambda.integration_uri
+  api_stage_name              = var.api_stage_name
+  cors_allowed_origins        = var.cors_allowed_origins
+  apigateway_cwlogs_arn       = module.cloudwatch.apigateway_cwlogs_arn
+  apigateway_log_format       = var.apigateway_log_format
+  bikestation_integration_uri = var.bikestation_integration_uri
 }

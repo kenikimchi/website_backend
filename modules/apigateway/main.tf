@@ -1,5 +1,6 @@
 # API Gateway
 
+#Page Count API
 resource "aws_apigatewayv2_api" "site_api" {
   name          = var.apigateway_name
   protocol_type = "HTTP"
@@ -19,7 +20,7 @@ resource "aws_apigatewayv2_stage" "api_stage" {
 
   access_log_settings {
     destination_arn = var.apigateway_cwlogs_arn
-    format = "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime]\"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId $context.extendedRequestId"
+    format          = var.apigateway_log_format
   }
 }
 
@@ -37,6 +38,28 @@ resource "aws_apigatewayv2_route" "lambda_route" {
   target    = "integrations/${aws_apigatewayv2_integration.api_integration.id}"
 }
 
+# Bike Station API
+resource "aws_apigatewayv2_route" "bikestation_route" {
+  api_id    = aws_apigatewayv2_api.site_api.id
+  route_key = "GET /bikestation"
+  target    = "integrations/${aws_apigatewayv2_integration.bike_station.id}"
+}
+
+resource "aws_apigatewayv2_integration" "bike_station" {
+  api_id               = aws_apigatewayv2_api.site_api.id
+  integration_type     = "HTTP_PROXY"
+  integration_method   = "GET"
+  integration_uri      = var.bikestation_integration_uri
+  passthrough_behavior = "WHEN_NO_MATCH"
+
+  response_parameters {
+    status_code = 200
+    mappings = {
+      "overwrite:statuscode" = "204"
+    }
+  }
+}
+
 # Permissions
 resource "aws_api_gateway_account" "cwlogs_permissions" {
   cloudwatch_role_arn = aws_iam_role.cloudwatch.arn
@@ -47,16 +70,16 @@ data "aws_iam_policy_document" "assume_role" {
     effect = "Allow"
 
     principals {
-      type = "Service"
+      type        = "Service"
       identifiers = ["apigateway.amazonaws.com"]
     }
 
-    actions = [ "sts:AssumeRole" ]
+    actions = ["sts:AssumeRole"]
   }
 }
 
 resource "aws_iam_role" "cloudwatch" {
-  name = "api_gateway_cloudwatch"
+  name               = "api_gateway_cloudwatch"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -79,7 +102,7 @@ data "aws_iam_policy_document" "cloudwatch" {
 }
 
 resource "aws_iam_role_policy" "cloudwatch" {
-  name = "default"
-  role = aws_iam_role.cloudwatch.id
+  name   = "default"
+  role   = aws_iam_role.cloudwatch.id
   policy = data.aws_iam_policy_document.cloudwatch.json
 }
