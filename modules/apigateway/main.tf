@@ -51,13 +51,6 @@ resource "aws_apigatewayv2_integration" "bike_station" {
   integration_method   = "GET"
   integration_uri      = var.bikestation_integration_uri
   passthrough_behavior = "WHEN_NO_MATCH"
-
-  response_parameters {
-    status_code = 200
-    mappings = {
-      "overwrite:statuscode" = "204"
-    }
-  }
 }
 
 # Permissions
