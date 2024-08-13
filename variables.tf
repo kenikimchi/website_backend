@@ -198,3 +198,7 @@ variable "apigateway_log_format" {
 variable "bikestation_integration_uri" {
   type = string
 }
+
+variable "station_location_uri" {
+  type = string
+}

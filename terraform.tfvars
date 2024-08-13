@@ -58,3 +58,4 @@ api_stage_name              = "prod"
 cors_allowed_origins        = ["https://www.kendrickkim.com"]
 apigateway_log_format       = "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime]\"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId $context.extendedRequestId"
 bikestation_integration_uri = "https://gbfs.lyft.com/gbfs/1.1/chi/en/station_status.json"
+station_location_uri        = "https://gbfs.lyft.com/gbfs/1.1/chi/en/station_information.json"

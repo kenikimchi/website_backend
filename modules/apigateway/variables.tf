@@ -32,3 +32,8 @@ variable "bikestation_integration_uri" {
   description = "HTTP URL of the bikestation API"
   type        = string
 }
+
+variable "station_location_uri" {
+  description = "HTTP URL of the bikestation API for station locations"
+  type        = string
+}

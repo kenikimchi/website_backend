@@ -136,4 +136,5 @@ module "apigateway" {
   apigateway_cwlogs_arn       = module.cloudwatch.apigateway_cwlogs_arn
   apigateway_log_format       = var.apigateway_log_format
   bikestation_integration_uri = var.bikestation_integration_uri
+  station_location_uri        = var.station_location_uri
 }

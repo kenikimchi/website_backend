@@ -53,6 +53,20 @@ resource "aws_apigatewayv2_integration" "bike_station" {
   passthrough_behavior = "WHEN_NO_MATCH"
 }
 
+resource "aws_apigatewayv2_route" "station_location" {
+  api_id    = aws_apigatewayv2_api.site_api.id
+  route_key = "GET /stationloc"
+  target    = "integrations/${aws_apigatewayv2_integration.station_location.id}"
+}
+
+resource "aws_apigatewayv2_integration" "station_location" {
+  api_id               = aws_apigatewayv2_api.site_api.id
+  integration_type     = "HTTP_PROXY"
+  integration_method   = "GET"
+  integration_uri      = var.station_location_uri
+  passthrough_behavior = "WHEN_NO_MATCH"
+}
+
 # Permissions
 resource "aws_api_gateway_account" "cwlogs_permissions" {
   cloudwatch_role_arn = aws_iam_role.cloudwatch.arn
