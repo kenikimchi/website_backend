@@ -32,3 +32,8 @@ variable "codebuild_role_arn" {
   description = "Role arn used by codebuild"
   type        = string
 }
+
+variable "s3_distribution_arn" {
+  description = "ARN of the cloudfront distribution"
+  type = string
+}

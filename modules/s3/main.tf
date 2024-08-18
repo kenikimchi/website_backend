@@ -76,9 +76,9 @@ data "aws_iam_policy_document" "cloudfront_access" {
     resources = ["${aws_s3_bucket.www.arn}/*"]
 
     condition {
-      test = "StringEquals"
+      test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values = module.cloudfront.s3_distribution_arn
+      values   = [var.s3_distribution_arn]
     }
   }
 }

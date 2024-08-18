@@ -26,6 +26,7 @@ module "s3" {
   logging_bucket_name   = var.logging_bucket_name
   codepipeline_role_arn = module.codepipeline.codepipeline_role_arn
   codebuild_role_arn    = module.codebuild.codebuild_role_arn
+  s3_distribution_arn   = module.cloudfront.s3_distribution_arn
 }
 
 module "cloudfront" {
