@@ -74,6 +74,12 @@ data "aws_iam_policy_document" "cloudfront_access" {
     effect    = "Allow"
     actions   = ["s3:GetObject"]
     resources = ["${aws_s3_bucket.www.arn}/*"]
+
+    condition {
+      test = "StringEquals"
+      variable = "AWS:SourceArn"
+      values = module.cloudfront.s3_distribution_arn
+    }
   }
 }
 
