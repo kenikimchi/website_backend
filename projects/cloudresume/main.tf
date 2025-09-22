@@ -17,7 +17,7 @@ provider "aws" {
 
 # Modules
 module "s3" {
-  source = "./modules/s3"
+  source = "/modules/s3"
 
   domain_name           = var.domain_name
   pipeline_bucket       = var.pipeline_bucket
@@ -30,7 +30,7 @@ module "s3" {
 }
 
 module "cloudfront" {
-  source = "./modules/cloudfront"
+  source = "/modules/cloudfront"
 
   site_aliases              = var.site_aliases
   price_class               = var.price_class
@@ -42,7 +42,7 @@ module "cloudfront" {
 }
 
 module "route53" {
-  source = "./modules/route53"
+  source = "/modules/route53"
 
   domain_name                     = var.domain_name
   private_zone                    = false
@@ -51,7 +51,7 @@ module "route53" {
 }
 
 module "codecommit" {
-  source = "./modules/codecommit"
+  source = "/modules/codecommit"
 
   source_repository_name   = var.source_repo_name
   source_repository_branch = var.source_repo_branch
@@ -60,7 +60,7 @@ module "codecommit" {
 
 module "codebuild" {
   depends_on = [module.codecommit]
-  source     = "./modules/codebuild"
+  source     = "/modules/codebuild"
 
   environment_image             = var.environment_image
   artifacts_type                = var.artifacts_type
@@ -80,7 +80,7 @@ module "codebuild" {
 
 module "codepipeline" {
   depends_on = [module.codebuild]
-  source     = "./modules/codepipeline"
+  source     = "/modules/codepipeline"
 
   stages                        = var.stages
   project_name                  = var.project_name
@@ -95,14 +95,14 @@ module "codepipeline" {
 
 # DynamoDB
 module "dynamodb" {
-  source = "./modules/dynamodb"
+  source = "/modules/dynamodb"
 
   tfstate_table_name = var.tfstate_table_name
 }
 
 # CloudWatch
 module "cloudwatch" {
-  source = "./modules/cloudwatch"
+  source = "/modules/cloudwatch"
 
   pipeline_log_group_name  = var.pipeline_log_group_name
   pipeline_log_stream_name = var.pipeline_log_stream_name
@@ -111,7 +111,7 @@ module "cloudwatch" {
 
 # Lambda
 module "lambda" {
-  source = "./modules/lambda"
+  source = "/modules/lambda"
 
   lambda_function_name      = var.lambda_function_name
   api_gateway_execution_arn = module.apigateway.apigatewayv2_api_arn
@@ -121,14 +121,14 @@ module "lambda" {
 
 # KMS
 module "kms" {
-  source = "./modules/kms"
+  source = "/modules/kms"
 
   codepipeline_role_arn = module.codepipeline.codepipeline_role_arn
 }
 
 # API Gateway
 module "apigateway" {
-  source = "./modules/apigateway"
+  source = "/modules/apigateway"
 
   apigateway_name             = var.apigateway_name
   integration_uri             = module.lambda.integration_uri
